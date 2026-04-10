@@ -8,7 +8,7 @@ const LanguageSelector: React.FC = () => {
   return (
     <button
       onClick={() => setLanguage(language === "en" ? "ur" : "en")}
-      className="glass-card flex items-center gap-2 px-3 py-2 text-sm font-medium text-foreground transition-colors hover:bg-secondary/50"
+      className="flex items-center gap-2 rounded-xl border border-border bg-card px-3 py-2 text-sm font-medium text-foreground transition-colors hover:bg-secondary"
     >
       <Globe className="h-4 w-4" />
       <span>{language === "en" ? "اردو" : "English"}</span>
