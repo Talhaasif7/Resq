@@ -15,6 +15,7 @@ export default {
     extend: {
       fontFamily: {
         sans: ["Inter", "sans-serif"],
+        display: ["Space Grotesk", "sans-serif"],
         urdu: ["Noto Nastaliq Urdu", "serif"],
       },
       colors: {
@@ -98,8 +99,12 @@ export default {
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
         "pulse-glow": {
-          "0%, 100%": { opacity: "1", boxShadow: "0 0 20px hsl(var(--alert) / 0.4)" },
-          "50%": { opacity: "0.8", boxShadow: "0 0 40px hsl(var(--alert) / 0.8)" },
+          "0%, 100%": { opacity: "1" },
+          "50%": { opacity: "0.6" },
+        },
+        float: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-12px)" },
         },
       },
       animation: {
@@ -107,6 +112,7 @@ export default {
         "accordion-up": "accordion-up 0.2s ease-out",
         "fade-in": "fade-in 0.5s ease-out forwards",
         "pulse-glow": "pulse-glow 2s ease-in-out infinite",
+        float: "float 6s ease-in-out infinite",
       },
     },
   },
