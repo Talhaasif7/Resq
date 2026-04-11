@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Search, Shield } from "lucide-react";
+import ThemeToggle from "@/components/ThemeToggle";
 import { LanguageProvider, useTranslation } from "@/contexts/LanguageContext";
 import LanguageSelector from "@/components/molecules/LanguageSelector";
 import SOSButton from "@/components/atoms/SOSButton";
@@ -39,7 +40,10 @@ const DashboardContent: React.FC = () => {
             </div>
           </div>
 
-          <LanguageSelector />
+          <div className="flex items-center gap-3">
+            <ThemeToggle />
+            <LanguageSelector />
+          </div>
         </div>
       </header>
 
