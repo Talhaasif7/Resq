@@ -104,6 +104,7 @@ const stats = [
 
 const Landing: React.FC = () => {
   const { scrollYProgress } = useScroll();
+  const { isAuthenticated } = useAuth();
   const heroParallax = useTransform(scrollYProgress, [0, 0.3], [0, -80]);
   const heroScale = useTransform(scrollYProgress, [0, 0.2], [1, 0.95]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.25], [1, 0.6]);
