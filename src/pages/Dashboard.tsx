@@ -7,15 +7,19 @@ import LanguageSelector from "@/components/molecules/LanguageSelector";
 import SOSButton from "@/components/atoms/SOSButton";
 import LiveCrisisFeed from "@/components/organisms/LiveCrisisFeed";
 import AITrustPanel from "@/components/organisms/AITrustPanel";
-import SafetyMap from "@/components/organisms/SafetyMap";
+import InteractiveMap from "@/components/organisms/InteractiveMap";
 import CommunityReporting from "@/components/organisms/CommunityReporting";
 import SafeRouteSidebar from "@/components/organisms/SafeRouteSidebar";
 import VoiceAlertWaveform from "@/components/organisms/VoiceAlertWaveform";
 import QuickStats from "@/components/organisms/QuickStats";
+import LiveChatBox from "@/components/organisms/LiveChatBox";
 import { Link } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
+import { Button } from "@/components/ui/button";
 
 const DashboardContent: React.FC = () => {
   const { t } = useTranslation();
+  const { user, isAuthenticated } = useAuth();
 
   return (
     <div className="relative min-h-screen bg-background">
@@ -41,8 +45,23 @@ const DashboardContent: React.FC = () => {
           </div>
 
           <div className="flex items-center gap-3">
+            <div className="hidden sm:flex items-center gap-2 text-xs">
+              <Link to="/shelters" className="rounded-lg px-2.5 py-1.5 text-muted-foreground hover:bg-secondary hover:text-foreground transition-colors">Shelters</Link>
+              <Link to="/qa" className="rounded-lg px-2.5 py-1.5 text-muted-foreground hover:bg-secondary hover:text-foreground transition-colors">Q&A</Link>
+            </div>
             <ThemeToggle />
             <LanguageSelector />
+            {isAuthenticated ? (
+              <Link to="/profile">
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">
+                  {user?.name?.[0] || "U"}
+                </div>
+              </Link>
+            ) : (
+              <Link to="/signin">
+                <Button size="sm" variant="outline" className="text-xs">Sign In</Button>
+              </Link>
+            )}
           </div>
         </div>
       </header>
@@ -61,7 +80,7 @@ const DashboardContent: React.FC = () => {
 
           <div className="grid gap-4 md:grid-cols-2 lg:gap-6">
             <div className="min-h-[350px]">
-              <SafetyMap />
+              <InteractiveMap />
             </div>
             <div className="min-h-[350px]">
               <CommunityReporting />
@@ -82,7 +101,8 @@ const DashboardContent: React.FC = () => {
         </div>
       </main>
 
-      {/* Floating SOS Button */}
+      {/* Floating elements */}
+      <LiveChatBox />
       <div className="fixed bottom-6 right-6 z-50">
         <SOSButton />
       </div>

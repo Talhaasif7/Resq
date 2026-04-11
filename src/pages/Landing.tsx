@@ -1,6 +1,7 @@
 import React from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Link } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
 import {
   Shield,
   ArrowRight,
@@ -103,6 +104,7 @@ const stats = [
 
 const Landing: React.FC = () => {
   const { scrollYProgress } = useScroll();
+  const { isAuthenticated } = useAuth();
   const heroParallax = useTransform(scrollYProgress, [0, 0.3], [0, -80]);
   const heroScale = useTransform(scrollYProgress, [0, 0.2], [1, 0.95]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.25], [1, 0.6]);
@@ -126,7 +128,8 @@ const Landing: React.FC = () => {
           <div className="hidden items-center gap-8 md:flex">
             <a href="#features" className="text-sm text-muted-foreground transition-colors hover:text-foreground">Features</a>
             <a href="#how-it-works" className="text-sm text-muted-foreground transition-colors hover:text-foreground">How It Works</a>
-            <a href="#stats" className="text-sm text-muted-foreground transition-colors hover:text-foreground">Impact</a>
+            <Link to="/shelters" className="text-sm text-muted-foreground transition-colors hover:text-foreground">Shelters</Link>
+            <Link to="/qa" className="text-sm text-muted-foreground transition-colors hover:text-foreground">Q&A</Link>
           </div>
           <div className="flex items-center gap-3">
             <ThemeToggle />
@@ -135,11 +138,17 @@ const Landing: React.FC = () => {
                 Dashboard
               </Button>
             </Link>
-            <Link to="/dashboard">
-              <Button size="sm" className="gap-1.5">
-                Get Started <ArrowRight className="h-3.5 w-3.5" />
-              </Button>
-            </Link>
+            {isAuthenticated ? (
+              <Link to="/profile">
+                <Button size="sm" className="gap-1.5">Profile</Button>
+              </Link>
+            ) : (
+              <Link to="/signup">
+                <Button size="sm" className="gap-1.5">
+                  Get Started <ArrowRight className="h-3.5 w-3.5" />
+                </Button>
+              </Link>
+            )}
           </div>
         </div>
       </nav>
@@ -574,10 +583,12 @@ const Landing: React.FC = () => {
             </div>
             <span className="font-display text-lg font-bold text-foreground">ResQ</span>
           </div>
-          <div className="flex items-center gap-6 text-sm text-muted-foreground">
+          <div className="flex flex-wrap items-center gap-6 text-sm text-muted-foreground">
             <Link to="/dashboard" className="transition-colors hover:text-foreground">Dashboard</Link>
+            <Link to="/shelters" className="transition-colors hover:text-foreground">Shelters</Link>
+            <Link to="/qa" className="transition-colors hover:text-foreground">Q&A</Link>
+            <Link to="/signin" className="transition-colors hover:text-foreground">Sign In</Link>
             <a href="#features" className="transition-colors hover:text-foreground">Features</a>
-            <a href="#how-it-works" className="transition-colors hover:text-foreground">How It Works</a>
           </div>
           <p className="text-xs text-muted-foreground">© 2026 ResQ. Protecting Pakistan.</p>
         </div>
