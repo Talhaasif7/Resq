@@ -127,7 +127,8 @@ const Landing: React.FC = () => {
           <div className="hidden items-center gap-8 md:flex">
             <a href="#features" className="text-sm text-muted-foreground transition-colors hover:text-foreground">Features</a>
             <a href="#how-it-works" className="text-sm text-muted-foreground transition-colors hover:text-foreground">How It Works</a>
-            <a href="#stats" className="text-sm text-muted-foreground transition-colors hover:text-foreground">Impact</a>
+            <Link to="/shelters" className="text-sm text-muted-foreground transition-colors hover:text-foreground">Shelters</Link>
+            <Link to="/qa" className="text-sm text-muted-foreground transition-colors hover:text-foreground">Q&A</Link>
           </div>
           <div className="flex items-center gap-3">
             <ThemeToggle />
@@ -136,11 +137,20 @@ const Landing: React.FC = () => {
                 Dashboard
               </Button>
             </Link>
-            <Link to="/dashboard">
-              <Button size="sm" className="gap-1.5">
-                Get Started <ArrowRight className="h-3.5 w-3.5" />
-              </Button>
-            </Link>
+            {(() => {
+              const { isAuthenticated } = useAuth();
+              return isAuthenticated ? (
+                <Link to="/profile">
+                  <Button size="sm" className="gap-1.5">Profile</Button>
+                </Link>
+              ) : (
+                <Link to="/signup">
+                  <Button size="sm" className="gap-1.5">
+                    Get Started <ArrowRight className="h-3.5 w-3.5" />
+                  </Button>
+                </Link>
+              );
+            })()}
           </div>
         </div>
       </nav>
