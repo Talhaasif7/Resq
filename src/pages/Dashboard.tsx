@@ -39,7 +39,10 @@ const DashboardContent: React.FC = () => {
             </div>
           </div>
 
-          <LanguageSelector />
+          <div className="flex items-center gap-3">
+            <ThemeToggle />
+            <LanguageSelector />
+          </div>
         </div>
       </header>
 
