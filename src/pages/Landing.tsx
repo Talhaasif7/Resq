@@ -583,10 +583,12 @@ const Landing: React.FC = () => {
             </div>
             <span className="font-display text-lg font-bold text-foreground">ResQ</span>
           </div>
-          <div className="flex items-center gap-6 text-sm text-muted-foreground">
+          <div className="flex flex-wrap items-center gap-6 text-sm text-muted-foreground">
             <Link to="/dashboard" className="transition-colors hover:text-foreground">Dashboard</Link>
+            <Link to="/shelters" className="transition-colors hover:text-foreground">Shelters</Link>
+            <Link to="/qa" className="transition-colors hover:text-foreground">Q&A</Link>
+            <Link to="/signin" className="transition-colors hover:text-foreground">Sign In</Link>
             <a href="#features" className="transition-colors hover:text-foreground">Features</a>
-            <a href="#how-it-works" className="transition-colors hover:text-foreground">How It Works</a>
           </div>
           <p className="text-xs text-muted-foreground">© 2026 ResQ. Protecting Pakistan.</p>
         </div>
