@@ -138,20 +138,17 @@ const Landing: React.FC = () => {
                 Dashboard
               </Button>
             </Link>
-            {(() => {
-              const { isAuthenticated } = useAuth();
-              return isAuthenticated ? (
-                <Link to="/profile">
-                  <Button size="sm" className="gap-1.5">Profile</Button>
-                </Link>
-              ) : (
-                <Link to="/signup">
-                  <Button size="sm" className="gap-1.5">
-                    Get Started <ArrowRight className="h-3.5 w-3.5" />
-                  </Button>
-                </Link>
-              );
-            })()}
+            {isAuthenticated ? (
+              <Link to="/profile">
+                <Button size="sm" className="gap-1.5">Profile</Button>
+              </Link>
+            ) : (
+              <Link to="/signup">
+                <Button size="sm" className="gap-1.5">
+                  Get Started <ArrowRight className="h-3.5 w-3.5" />
+                </Button>
+              </Link>
+            )}
           </div>
         </div>
       </nav>
