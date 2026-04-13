@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Search, Shield } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 import { LanguageProvider, useTranslation } from "@/contexts/LanguageContext";
-import LanguageSelector from "@/components/molecules/LanguageSelector";
+import VoiceLanguageSettings from "@/components/molecules/VoiceLanguageSettings";
 import SOSButton from "@/components/atoms/SOSButton";
 import LiveCrisisFeed from "@/components/organisms/LiveCrisisFeed";
 import AITrustPanel from "@/components/organisms/AITrustPanel";
