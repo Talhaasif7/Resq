@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import SubmitCrisisAlert from "@/components/organisms/SubmitCrisisAlert";
 import { Search, Shield } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 import { LanguageProvider, useTranslation } from "@/contexts/LanguageContext";
@@ -103,6 +104,9 @@ const DashboardContent: React.FC = () => {
 
       {/* Floating elements */}
       <LiveChatBox />
+      <div className="fixed bottom-6 left-6 z-50">
+        <SubmitCrisisAlert />
+      </div>
       <div className="fixed bottom-6 right-6 z-50">
         <SOSButton />
       </div>
