@@ -11,6 +11,7 @@ import AITrustPanel from "@/components/organisms/AITrustPanel";
 import InteractiveMap from "@/components/organisms/InteractiveMap";
 import CommunityReporting from "@/components/organisms/CommunityReporting";
 import SafeRouteSidebar from "@/components/organisms/SafeRouteSidebar";
+import CrisisMapRoutes from "@/components/organisms/CrisisMapRoutes";
 import VoiceAlertWaveform from "@/components/organisms/VoiceAlertWaveform";
 import QuickStats from "@/components/organisms/QuickStats";
 import LiveChatBox from "@/components/organisms/LiveChatBox";
@@ -77,6 +78,11 @@ const DashboardContent: React.FC = () => {
             <div className="min-h-[400px]">
               <AITrustPanel />
             </div>
+          </div>
+
+          {/* Crisis Map & Safe Routes — full width */}
+          <div className="min-h-[420px]">
+            <CrisisMapRoutes />
           </div>
 
           <div className="grid gap-4 md:grid-cols-2 lg:gap-6">
