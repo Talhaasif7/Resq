@@ -11,6 +11,7 @@ import AITrustPanel from "@/components/organisms/AITrustPanel";
 import InteractiveMap from "@/components/organisms/InteractiveMap";
 import CommunityReporting from "@/components/organisms/CommunityReporting";
 import SafeRouteSidebar from "@/components/organisms/SafeRouteSidebar";
+import CrisisMapRoutes from "@/components/organisms/CrisisMapRoutes";
 import VoiceAlertWaveform from "@/components/organisms/VoiceAlertWaveform";
 import QuickStats from "@/components/organisms/QuickStats";
 import LiveChatBox from "@/components/organisms/LiveChatBox";
