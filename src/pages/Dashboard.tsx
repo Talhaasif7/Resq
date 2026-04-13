@@ -50,7 +50,7 @@ const DashboardContent: React.FC = () => {
               <Link to="/qa" className="rounded-lg px-2.5 py-1.5 text-muted-foreground hover:bg-secondary hover:text-foreground transition-colors">Q&A</Link>
             </div>
             <ThemeToggle />
-            <LanguageSelector />
+            <VoiceLanguageSettings />
             {isAuthenticated ? (
               <Link to="/profile">
                 <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">
