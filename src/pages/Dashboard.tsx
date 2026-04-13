@@ -80,6 +80,11 @@ const DashboardContent: React.FC = () => {
             </div>
           </div>
 
+          {/* Crisis Map & Safe Routes — full width */}
+          <div className="min-h-[420px]">
+            <CrisisMapRoutes />
+          </div>
+
           <div className="grid gap-4 md:grid-cols-2 lg:gap-6">
             <div className="min-h-[350px]">
               <InteractiveMap />
