@@ -45,25 +45,35 @@ const SignUp: React.FC = () => {
   const goNext = () => { setDirection(1); setStep(2); };
   const goBack = () => { setDirection(-1); setStep(1); };
 
+  const validateEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.name || !form.email || !form.password) {
+    if (!form.name.trim() || !form.email.trim() || !form.password.trim()) {
       toast.error("Please fill in all required fields");
+      return;
+    }
+    if (!validateEmail(form.email)) {
+      toast.error("Please enter a valid email address");
+      return;
+    }
+    if (form.password.length < 8) {
+      toast.error("Password must be at least 8 characters");
       return;
     }
     setLoading(true);
     const success = await signUp({
       name: form.name,
       email: form.email,
-      phone: "",
       city: form.city,
-      cnic: "",
       role: form.role,
     });
     setLoading(false);
     if (success) {
       toast.success("Account created! Welcome to ResQ.");
       navigate(form.role === "volunteer" ? "/verification" : "/dashboard");
+    } else {
+      toast.error("Something went wrong. Please try again.");
     }
   };
 
@@ -152,6 +162,7 @@ const SignUp: React.FC = () => {
             {(["citizen", "volunteer"] as const).map((r) => (
               <motion.button
                 key={r}
+                type="button"
                 onClick={() => update("role", r)}
                 className={`relative flex-1 rounded-lg py-2.5 text-sm font-medium transition-colors ${
                   form.role === r ? "text-primary-foreground" : "text-muted-foreground hover:text-foreground"
@@ -185,7 +196,7 @@ const SignUp: React.FC = () => {
                 >
                   <InputField icon={User} label="Full Name *" id="name" placeholder="Your full name" value={form.name} onChange={(e: any) => update("name", e.target.value)} />
                   <InputField icon={Mail} label="Email *" id="email" type="email" placeholder="you@example.com" value={form.email} onChange={(e: any) => update("email", e.target.value)} />
-                  
+
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-foreground">Password *</label>
                     <div className={`relative rounded-xl transition-all duration-300 ${focusedField === "password" ? "ring-2 ring-primary/40" : ""}`}>
@@ -203,12 +214,26 @@ const SignUp: React.FC = () => {
                         {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                       </button>
                     </div>
+                    {form.password.length > 0 && form.password.length < 8 && (
+                      <p className="text-xs text-alert">Password must be at least 8 characters</p>
+                    )}
                   </div>
 
                   <Button
                     type="button"
                     onClick={() => {
-                      if (!form.name || !form.email || !form.password) { toast.error("Fill required fields"); return; }
+                      if (!form.name.trim() || !form.email.trim() || !form.password.trim()) {
+                        toast.error("Fill all required fields");
+                        return;
+                      }
+                      if (!validateEmail(form.email)) {
+                        toast.error("Please enter a valid email");
+                        return;
+                      }
+                      if (form.password.length < 8) {
+                        toast.error("Password must be at least 8 characters");
+                        return;
+                      }
                       goNext();
                     }}
                     className="group w-full gap-2 rounded-xl"

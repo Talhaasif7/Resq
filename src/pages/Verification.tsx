@@ -16,8 +16,8 @@ const steps = [
 const Verification: React.FC = () => {
   const { user, updateVerification } = useAuth();
   const navigate = useNavigate();
-  const [cnicFront, setCnicFront] = useState<string | null>(null);
-  const [cnicBack, setCnicBack] = useState<string | null>(null);
+  const [idFront, setIdFront] = useState<string | null>(null);
+  const [idBack, setIdBack] = useState<string | null>(null);
   const [selfie, setSelfie] = useState<string | null>(null);
 
   const status = user?.verificationStatus || "unsubmitted";
@@ -25,17 +25,22 @@ const Verification: React.FC = () => {
 
   const handleFileChange = (setter: (v: string) => void) => (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) setter(file.name);
+    if (file) {
+      if (file.size > 10 * 1024 * 1024) {
+        toast.error("File must be under 10MB");
+        return;
+      }
+      setter(file.name);
+    }
   };
 
   const handleSubmit = () => {
-    if (!cnicFront || !cnicBack) {
-      toast.error("Please upload both CNIC sides");
+    if (!idFront || !idBack) {
+      toast.error("Please upload both sides of your ID document");
       return;
     }
     updateVerification("pending");
     toast.success("Documents submitted! Review typically takes 24-48 hours.");
-    // Simulate auto-verification after 5 seconds for demo
     setTimeout(() => {
       updateVerification("verified");
       toast.success("🎉 Congratulations! You are now a verified volunteer.");
@@ -143,23 +148,23 @@ const Verification: React.FC = () => {
             <div className="space-y-6">
               <div className="grid gap-4 sm:grid-cols-2">
                 <label className="group cursor-pointer rounded-2xl border-2 border-dashed border-border bg-secondary/20 p-6 text-center transition-colors hover:border-primary/50">
-                  <input type="file" accept="image/*" className="hidden" onChange={handleFileChange(setCnicFront)} />
+                  <input type="file" accept="image/*" className="hidden" onChange={handleFileChange(setIdFront)} />
                   <FileText className="mx-auto mb-2 h-8 w-8 text-muted-foreground group-hover:text-primary" />
-                  <p className="text-sm font-medium text-foreground">CNIC Front *</p>
-                  <p className="mt-1 text-xs text-muted-foreground">{cnicFront || "Click to upload"}</p>
+                  <p className="text-sm font-medium text-foreground">ID Front *</p>
+                  <p className="mt-1 text-xs text-muted-foreground">{idFront || "Click to upload"}</p>
                 </label>
                 <label className="group cursor-pointer rounded-2xl border-2 border-dashed border-border bg-secondary/20 p-6 text-center transition-colors hover:border-primary/50">
-                  <input type="file" accept="image/*" className="hidden" onChange={handleFileChange(setCnicBack)} />
+                  <input type="file" accept="image/*" className="hidden" onChange={handleFileChange(setIdBack)} />
                   <FileText className="mx-auto mb-2 h-8 w-8 text-muted-foreground group-hover:text-primary" />
-                  <p className="text-sm font-medium text-foreground">CNIC Back *</p>
-                  <p className="mt-1 text-xs text-muted-foreground">{cnicBack || "Click to upload"}</p>
+                  <p className="text-sm font-medium text-foreground">ID Back *</p>
+                  <p className="mt-1 text-xs text-muted-foreground">{idBack || "Click to upload"}</p>
                 </label>
               </div>
 
               <label className="group block cursor-pointer rounded-2xl border-2 border-dashed border-border bg-secondary/20 p-6 text-center transition-colors hover:border-primary/50">
                 <input type="file" accept="image/*" className="hidden" onChange={handleFileChange(setSelfie)} />
                 <Camera className="mx-auto mb-2 h-8 w-8 text-muted-foreground group-hover:text-primary" />
-                <p className="text-sm font-medium text-foreground">Selfie with CNIC (Optional)</p>
+                <p className="text-sm font-medium text-foreground">Selfie with ID (Optional)</p>
                 <p className="mt-1 text-xs text-muted-foreground">{selfie || "Click to upload"}</p>
               </label>
 

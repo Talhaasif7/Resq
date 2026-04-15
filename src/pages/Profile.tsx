@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
-import { Shield, User, Mail, Phone, MapPin, CreditCard, CheckCircle, Clock, XCircle, LogOut, ArrowRight, FileText, Award } from "lucide-react";
+import { Shield, User, Mail, MapPin, CheckCircle, Clock, XCircle, LogOut, ArrowRight, Award } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
 import ThemeToggle from "@/components/ThemeToggle";
@@ -25,7 +25,7 @@ const Profile: React.FC = () => {
     verified: { icon: CheckCircle, color: "text-safety", bg: "bg-safety/10", label: "Verified Volunteer" },
     pending: { icon: Clock, color: "text-trust", bg: "bg-trust/10", label: "Pending Review" },
     rejected: { icon: XCircle, color: "text-alert", bg: "bg-alert/10", label: "Rejected" },
-    unsubmitted: { icon: FileText, color: "text-muted-foreground", bg: "bg-secondary", label: "Not Submitted" },
+    unsubmitted: { icon: User, color: "text-muted-foreground", bg: "bg-secondary", label: "Not Submitted" },
   };
 
   const st = statusConfig[user.verificationStatus];
@@ -83,9 +83,7 @@ const Profile: React.FC = () => {
           <div className="space-y-4">
             {[
               { icon: Mail, label: "Email", value: user.email },
-              { icon: Phone, label: "Phone", value: user.phone || "Not provided" },
               { icon: MapPin, label: "City", value: user.city || "Not provided" },
-              { icon: CreditCard, label: "CNIC", value: user.cnic || "Not provided" },
               { icon: Award, label: "Member Since", value: user.joinedAt },
             ].map((item) => (
               <div key={item.label} className="flex items-center gap-3 rounded-xl bg-secondary/30 p-3">
@@ -102,7 +100,7 @@ const Profile: React.FC = () => {
 
           {/* Actions */}
           <div className="mt-8 flex gap-3">
-            {user.verificationStatus === "unsubmitted" && (
+            {user.verificationStatus === "unsubmitted" && user.role === "volunteer" && (
               <Link to="/verification" className="flex-1">
                 <Button className="w-full gap-2 rounded-xl">Verify Account <ArrowRight className="h-4 w-4" /></Button>
               </Link>
