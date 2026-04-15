@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
-import { Shield, Mail, Lock, ArrowRight, Eye, EyeOff, Zap } from "lucide-react";
+import { Shield, Mail, Lock, ArrowRight, Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useAuth } from "@/contexts/AuthContext";
@@ -26,10 +26,16 @@ const SignIn: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [focusedField, setFocusedField] = useState<string | null>(null);
 
+  const validateEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email || !password) {
+    if (!email.trim() || !password.trim()) {
       toast.error("Please fill in all fields");
+      return;
+    }
+    if (!validateEmail(email)) {
+      toast.error("Please enter a valid email address");
       return;
     }
     setLoading(true);
@@ -38,17 +44,17 @@ const SignIn: React.FC = () => {
     if (success) {
       toast.success("Welcome back to ResQ!");
       navigate("/dashboard");
+    } else {
+      toast.error("Invalid credentials. Please try again.");
     }
   };
 
   return (
     <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-background p-4">
-      {/* Animated background orbs */}
       <FloatingOrb delay={0} size={400} x="10%" y="-10%" />
       <FloatingOrb delay={1.5} size={300} x="70%" y="60%" />
       <FloatingOrb delay={3} size={250} x="50%" y="20%" />
 
-      {/* Grid pattern overlay */}
       <div className="pointer-events-none fixed inset-0 opacity-[0.015]"
         style={{ backgroundImage: "radial-gradient(hsl(var(--foreground)) 1px, transparent 1px)", backgroundSize: "24px 24px" }}
       />
@@ -63,11 +69,9 @@ const SignIn: React.FC = () => {
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         className="relative z-10 w-full max-w-md"
       >
-        {/* Glow behind card */}
         <div className="absolute -inset-1 rounded-3xl bg-gradient-to-br from-primary/20 via-transparent to-safety/20 opacity-50 blur-xl" />
 
         <div className="relative rounded-3xl border border-border/60 bg-card/80 p-8 shadow-2xl backdrop-blur-xl">
-          {/* Logo */}
           <motion.div
             initial={{ scale: 0.5, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
