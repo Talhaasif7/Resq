@@ -4,10 +4,8 @@ export interface User {
   id: string;
   name: string;
   email: string;
-  phone: string;
   city: string;
   role: "volunteer" | "citizen";
-  cnic: string;
   verificationStatus: "pending" | "verified" | "rejected" | "unsubmitted";
   avatar?: string;
   joinedAt: string;
@@ -19,7 +17,7 @@ interface AuthContextType {
   user: User | null;
   isAuthenticated: boolean;
   signIn: (email: string, password: string) => Promise<boolean>;
-  signUp: (data: Omit<User, "id" | "verificationStatus" | "joinedAt" | "reportsSubmitted" | "trustScore">) => Promise<boolean>;
+  signUp: (data: Pick<User, "name" | "email" | "city" | "role">) => Promise<boolean>;
   signOut: () => void;
   updateVerification: (status: User["verificationStatus"]) => void;
 }
@@ -30,10 +28,8 @@ const MOCK_USER: User = {
   id: "usr_001",
   name: "Talha Asif",
   email: "talha@resq.pk",
-  phone: "+92 300 1234567",
   city: "Lahore",
   role: "volunteer",
-  cnic: "35202-1234567-1",
   verificationStatus: "verified",
   avatar: undefined,
   joinedAt: "2025-12-01",
@@ -43,22 +39,31 @@ const MOCK_USER: User = {
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(() => {
-    const saved = localStorage.getItem("resq_user");
-    return saved ? JSON.parse(saved) : null;
+    try {
+      const saved = localStorage.getItem("resq_user");
+      return saved ? JSON.parse(saved) : null;
+    } catch {
+      localStorage.removeItem("resq_user");
+      return null;
+    }
   });
 
   const signIn = useCallback(async (email: string, _password: string): Promise<boolean> => {
-    // Mock auth — accepts any email/password
-    const mockUser = { ...MOCK_USER, email };
+    if (!email.trim() || !_password.trim()) return false;
+    const mockUser = { ...MOCK_USER, email: email.trim() };
     setUser(mockUser);
     localStorage.setItem("resq_user", JSON.stringify(mockUser));
     return true;
   }, []);
 
-  const signUp = useCallback(async (data: Omit<User, "id" | "verificationStatus" | "joinedAt" | "reportsSubmitted" | "trustScore">): Promise<boolean> => {
+  const signUp = useCallback(async (data: Pick<User, "name" | "email" | "city" | "role">): Promise<boolean> => {
+    if (!data.name.trim() || !data.email.trim()) return false;
     const newUser: User = {
-      ...data,
       id: `usr_${Date.now()}`,
+      name: data.name.trim(),
+      email: data.email.trim(),
+      city: data.city.trim(),
+      role: data.role,
       verificationStatus: "unsubmitted",
       joinedAt: new Date().toISOString().split("T")[0],
       reportsSubmitted: 0,
