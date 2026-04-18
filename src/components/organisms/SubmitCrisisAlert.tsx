@@ -1,5 +1,5 @@
 import React, { useState, useRef, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   Mic,
   Upload,
@@ -151,34 +151,31 @@ const SubmitCrisisAlert: React.FC<{ children?: React.ReactNode }> = ({ children 
             </div>
 
             {/* File list */}
-            <AnimatePresence>
-              {files.length > 0 && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: "auto" }}
-                  exit={{ opacity: 0, height: 0 }}
-                  className="mt-2 flex flex-wrap gap-2"
-                >
-                  {files.map((f, i) => (
-                    <span
-                      key={i}
-                      className="flex items-center gap-1.5 rounded-full bg-secondary px-2.5 py-1 text-xs text-foreground"
+            {files.length > 0 && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                className="mt-2 flex flex-wrap gap-2"
+              >
+                {files.map((f, i) => (
+                  <span
+                    key={i}
+                    className="flex items-center gap-1.5 rounded-full bg-secondary px-2.5 py-1 text-xs text-foreground"
+                  >
+                    {f.name.length > 18 ? f.name.slice(0, 15) + "…" : f.name}
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        removeFile(i);
+                      }}
+                      className="rounded-full p-0.5 hover:bg-muted"
                     >
-                      {f.name.length > 18 ? f.name.slice(0, 15) + "…" : f.name}
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          removeFile(i);
-                        }}
-                        className="rounded-full p-0.5 hover:bg-muted"
-                      >
-                        <X className="h-3 w-3" />
-                      </button>
-                    </span>
-                  ))}
-                </motion.div>
-              )}
-            </AnimatePresence>
+                      <X className="h-3 w-3" />
+                    </button>
+                  </span>
+                ))}
+              </motion.div>
+            )}
           </div>
 
           {/* Voice Memo */}
