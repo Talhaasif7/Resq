@@ -53,13 +53,15 @@ const CrisisMapRoutes: React.FC = () => {
           )}
 
           {/* Center overlay */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            {mapInitialized ? (
-              <p className="text-sm text-muted-foreground">
-                {/* GIS API integration point — render Leaflet map here */}
-                Interactive map loaded
-              </p>
-            ) : (
+          {mapInitialized ? (
+            <iframe
+              title="Crisis Map"
+              src="https://www.openstreetmap.org/export/embed.html?bbox=72.8%2C33.5%2C73.3%2C33.8&layer=mapnik&marker=33.6844%2C73.0479"
+              className="absolute inset-0 h-full w-full border-0"
+              loading="lazy"
+            />
+          ) : (
+            <div className="absolute inset-0 flex items-center justify-center">
               <Button
                 onClick={() => setMapInitialized(true)}
                 size="lg"
@@ -68,8 +70,8 @@ const CrisisMapRoutes: React.FC = () => {
                 <Map className="h-5 w-5" />
                 Initialize Interactive Map
               </Button>
-            )}
-          </div>
+            </div>
+          )}
         </div>
 
         {/* Route Panel — 40% */}
