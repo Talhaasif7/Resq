@@ -9,6 +9,7 @@ import SOSButton from "@/components/atoms/SOSButton";
 import LiveCrisisFeed from "@/components/organisms/LiveCrisisFeed";
 import AITrustPanel from "@/components/organisms/AITrustPanel";
 import InteractiveMap from "@/components/organisms/InteractiveMap";
+import ErrorBoundary from "@/components/ErrorBoundary";
 import CommunityReporting from "@/components/organisms/CommunityReporting";
 import SafeRouteSidebar from "@/components/organisms/SafeRouteSidebar";
 import CrisisMapRoutes from "@/components/organisms/CrisisMapRoutes";
@@ -87,7 +88,9 @@ const DashboardContent: React.FC = () => {
 
           <div className="grid gap-4 md:grid-cols-2 lg:gap-6">
             <div className="min-h-[350px]">
-              <InteractiveMap />
+              <ErrorBoundary>
+                <InteractiveMap />
+              </ErrorBoundary>
             </div>
             <div className="min-h-[350px]">
               <CommunityReporting />
