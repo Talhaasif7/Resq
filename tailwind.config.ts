@@ -14,8 +14,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ["Inter", "sans-serif"],
-        display: ["Space Grotesk", "sans-serif"],
+        sans: ["Inter", "system-ui", "sans-serif"],
+        display: ["JetBrains Mono", "ui-monospace", "monospace"],
+        mono: ["JetBrains Mono", "ui-monospace", "monospace"],
         urdu: ["Noto Nastaliq Urdu", "serif"],
       },
       colors: {
