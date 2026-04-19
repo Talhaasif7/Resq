@@ -232,9 +232,9 @@ const Landing: React.FC = () => {
 
           {/* Hero visual — Aurora glass dashboard preview */}
           <motion.div
-            initial={float3D.initial}
-            animate={float3D.animate}
-            style={{ perspective: 1400, transformStyle: "preserve-3d" }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
             className="relative mx-auto mt-24 max-w-6xl"
           >
             {/* Subtle accent glow */}
