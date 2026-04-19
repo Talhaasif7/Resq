@@ -201,16 +201,8 @@ const Landing: React.FC = () => {
               className="font-display text-4xl font-bold leading-tight text-foreground sm:text-5xl lg:text-7xl"
             >
               Stay Safe.{" "}
-              <span className="relative">
-                <span className="bg-gradient-to-r from-primary via-primary/80 to-info bg-clip-text text-transparent">
-                  Stay Informed.
-                </span>
-                <motion.span
-                  initial={{ scaleX: 0 }}
-                  animate={{ scaleX: 1 }}
-                  transition={{ duration: 0.8, delay: 0.8 }}
-                  className="absolute -bottom-2 left-0 h-1 w-full origin-left rounded-full bg-gradient-to-r from-primary to-info"
-                />
+              <span className="bg-gradient-to-r from-primary via-primary/80 to-trust bg-clip-text text-transparent">
+                Stay Informed.
               </span>
               <br />
               Stay Connected.
