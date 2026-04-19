@@ -103,10 +103,8 @@ const stats = [
 ];
 
 const Landing: React.FC = () => {
-  const { scrollYProgress } = useScroll();
   const { isAuthenticated } = useAuth();
-  const heroParallax = useTransform(scrollYProgress, [0, 0.3], [0, -40]);
-  const heroScale = useTransform(scrollYProgress, [0, 0.2], [1, 0.98]);
+
 
   return (
     <div className="min-h-screen bg-background">
