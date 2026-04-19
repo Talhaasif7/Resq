@@ -429,7 +429,7 @@ const Landing: React.FC = () => {
               <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-primary">Urdu · EN · PS · SD</span>
             </motion.div>
           </motion.div>
-        </motion.div>
+        </div>
       </section>
 
       {/* Stats */}
