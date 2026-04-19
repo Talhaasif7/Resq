@@ -236,122 +236,204 @@ const Landing: React.FC = () => {
             </motion.div>
           </div>
 
-          {/* Hero visual — 3D floating cards */}
+          {/* Hero visual — Aurora glass dashboard preview */}
           <motion.div
             initial={float3D.initial}
             animate={float3D.animate}
-            style={{ perspective: 1200, transformStyle: "preserve-3d" }}
-            className="relative mx-auto mt-20 max-w-5xl"
+            style={{ perspective: 1400, transformStyle: "preserve-3d" }}
+            className="relative mx-auto mt-24 max-w-6xl"
           >
-            {/* Glow behind card */}
-            <div className="absolute -inset-4 rounded-3xl bg-gradient-to-br from-primary/10 via-transparent to-safety/10 blur-2xl" />
-            
-            <div className="relative rounded-2xl border border-border/50 bg-card/80 p-3 shadow-2xl shadow-primary/5 backdrop-blur-sm">
-              <div className="grid grid-cols-3 gap-3">
-                {/* Mini crisis card */}
-                <motion.div 
-                  whileHover={{ scale: 1.02, rotateY: 2 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                  className="col-span-2 space-y-2 rounded-xl bg-gradient-to-br from-secondary/80 to-secondary/30 p-4"
-                >
-                  <div className="flex items-center gap-2">
-                    <span className="relative flex h-2 w-2">
-                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-alert opacity-75" />
-                      <span className="relative inline-flex h-2 w-2 rounded-full bg-alert" />
+            {/* Aurora glow halo */}
+            <div className="pointer-events-none absolute -inset-10 -z-10">
+              <div className="absolute left-1/4 top-0 h-72 w-72 rounded-full bg-primary/25 blur-[120px]" />
+              <div className="absolute right-1/4 bottom-0 h-72 w-72 rounded-full bg-trust/25 blur-[120px]" />
+              <div className="absolute left-1/2 top-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-safety/15 blur-[140px]" />
+            </div>
+
+            {/* Reflective glass frame */}
+            <div className="relative rounded-[28px] border border-white/40 bg-gradient-to-br from-white/70 via-white/40 to-white/20 p-2 shadow-[0_30px_80px_-20px_hsl(var(--primary)/0.35)] backdrop-blur-2xl dark:border-white/10 dark:from-white/10 dark:via-white/5 dark:to-transparent">
+              <div className="rounded-[22px] border border-border/40 bg-card/80 p-5 backdrop-blur-xl">
+                {/* Top status bar */}
+                <div className="mb-5 flex items-center justify-between border-b border-border/40 pb-4">
+                  <div className="flex items-center gap-3">
+                    <div className="flex gap-1.5">
+                      <span className="h-2.5 w-2.5 rounded-full bg-alert/60" />
+                      <span className="h-2.5 w-2.5 rounded-full bg-trust/60" />
+                      <span className="h-2.5 w-2.5 rounded-full bg-safety/60" />
+                    </div>
+                    <span className="font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
+                      resq.live / dashboard
                     </span>
-                    <span className="text-xs font-bold text-alert">LIVE</span>
-                    <span className="text-xs text-muted-foreground">Crisis Feed</span>
                   </div>
-                  {[1, 2, 3].map((i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.8 + i * 0.15 }}
-                      className="flex items-center gap-3 rounded-lg bg-card/80 p-3 shadow-sm"
-                    >
-                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">
-                        {90 + i}%
-                      </div>
-                      <div className="flex-1">
-                        <div className="h-2.5 w-3/4 rounded bg-muted" />
-                        <div className="mt-1 h-2 w-1/2 rounded bg-muted/60" />
-                      </div>
-                      <span className={`rounded-full px-2 py-0.5 text-[9px] font-semibold ${i === 1 ? 'bg-alert/10 text-alert' : i === 2 ? 'bg-trust/10 text-trust' : 'bg-info/10 text-info'}`}>
-                        {i === 1 ? 'Critical' : i === 2 ? 'High' : 'Moderate'}
-                      </span>
-                    </motion.div>
-                  ))}
-                </motion.div>
-                {/* Mini AI trust */}
-                <motion.div
-                  whileHover={{ scale: 1.03, rotateX: 3 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                  className="flex flex-col items-center justify-center rounded-xl bg-gradient-to-br from-secondary/80 to-secondary/30 p-4"
-                >
+                  <div className="flex items-center gap-2 rounded-full border border-safety/20 bg-safety/10 px-2.5 py-1">
+                    <span className="relative flex h-1.5 w-1.5">
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-safety opacity-75" />
+                      <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-safety" />
+                    </span>
+                    <span className="font-mono text-[10px] font-semibold uppercase tracking-wider text-safety">
+                      All Systems Operational
+                    </span>
+                  </div>
+                </div>
+
+                <div className="grid gap-4 lg:grid-cols-12">
+                  {/* Live crisis feed */}
                   <motion.div
-                    initial={{ rotate: -90 }}
-                    animate={{ rotate: 0 }}
-                    transition={{ duration: 1.2, delay: 0.6 }}
-                    className="relative mb-2 flex h-16 w-16 items-center justify-center"
+                    whileHover={{ y: -2 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                    className="space-y-3 rounded-2xl border border-border/40 bg-gradient-to-br from-secondary/60 to-secondary/10 p-4 lg:col-span-7"
                   >
-                    <svg className="-rotate-90" width="64" height="64">
-                      <circle cx="32" cy="32" r="28" fill="none" stroke="hsl(var(--muted))" strokeWidth="4" />
-                      <motion.circle
-                        cx="32"
-                        cy="32"
-                        r="28"
-                        fill="none"
-                        stroke="hsl(var(--safety))"
-                        strokeWidth="4"
-                        strokeLinecap="round"
-                        strokeDasharray="176"
-                        initial={{ strokeDashoffset: 176 }}
-                        animate={{ strokeDashoffset: 23 }}
-                        transition={{ duration: 1.5, delay: 0.8 }}
-                      />
-                    </svg>
-                    <span className="absolute text-sm font-bold text-foreground">87%</span>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <span className="relative flex h-2 w-2">
+                          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-alert opacity-75" />
+                          <span className="relative inline-flex h-2 w-2 rounded-full bg-alert" />
+                        </span>
+                        <span className="font-mono text-[11px] font-bold uppercase tracking-wider text-alert">Live</span>
+                        <span className="text-xs font-medium text-foreground">Crisis Feed</span>
+                      </div>
+                      <span className="font-mono text-[10px] text-muted-foreground">Updated 2s ago</span>
+                    </div>
+
+                    {[
+                      { trust: 97, severity: "Critical", color: "alert", title: "Flash Flood — Swat Valley", meta: "KP · 2 min ago", Icon: AlertTriangle },
+                      { trust: 92, severity: "High", color: "trust", title: "Earthquake 4.8M — Quetta", meta: "Balochistan · 8 min ago", Icon: Activity },
+                      { trust: 88, severity: "Moderate", color: "info", title: "Road Blockage — M-2 Motorway", meta: "Punjab · 14 min ago", Icon: Navigation },
+                    ].map((item, i) => {
+                      const sevClasses =
+                        item.color === "alert"
+                          ? "bg-alert/10 text-alert"
+                          : item.color === "trust"
+                          ? "bg-trust/10 text-trust"
+                          : "bg-info/10 text-info";
+                      return (
+                        <motion.div
+                          key={i}
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 0.6 + i * 0.12 }}
+                          className="group flex items-center gap-3 rounded-xl border border-border/40 bg-card/90 p-3 transition-all hover:border-primary/30 hover:shadow-md"
+                        >
+                          <div className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10">
+                            <item.Icon className="h-4 w-4 text-primary" />
+                            <span className="absolute -bottom-1 -right-1 rounded-full border-2 border-card bg-safety px-1 font-mono text-[8px] font-bold text-safety-foreground">
+                              {item.trust}
+                            </span>
+                          </div>
+                          <div className="min-w-0 flex-1">
+                            <p className="truncate text-xs font-semibold text-foreground">{item.title}</p>
+                            <p className="font-mono text-[10px] text-muted-foreground">{item.meta}</p>
+                          </div>
+                          <span className={`shrink-0 rounded-full px-2 py-0.5 font-mono text-[9px] font-bold uppercase tracking-wider ${sevClasses}`}>
+                            {item.severity}
+                          </span>
+                        </motion.div>
+                      );
+                    })}
                   </motion.div>
-                  <span className="text-[10px] font-medium text-muted-foreground">AI Trust Score</span>
-                  <div className="mt-2 flex items-center gap-1 rounded-full bg-safety/10 px-2 py-0.5">
-                    <CheckCircle className="h-3 w-3 text-safety" />
-                    <span className="text-[9px] font-semibold text-safety">Verified</span>
+
+                  {/* Right column — AI Trust + Mini stats */}
+                  <div className="space-y-4 lg:col-span-5">
+                    <motion.div
+                      whileHover={{ y: -2 }}
+                      transition={{ type: "spring", stiffness: 300 }}
+                      className="relative flex flex-col items-center justify-center overflow-hidden rounded-2xl border border-border/40 bg-gradient-to-br from-primary/10 via-trust/5 to-transparent p-5"
+                    >
+                      <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-primary/20 blur-2xl" />
+                      <motion.div
+                        initial={{ rotate: -90, opacity: 0 }}
+                        animate={{ rotate: 0, opacity: 1 }}
+                        transition={{ duration: 1.2, delay: 0.6 }}
+                        className="relative mb-2 flex h-20 w-20 items-center justify-center"
+                      >
+                        <svg className="-rotate-90" width="80" height="80">
+                          <circle cx="40" cy="40" r="34" fill="none" stroke="hsl(var(--muted))" strokeWidth="6" />
+                          <motion.circle
+                            cx="40"
+                            cy="40"
+                            r="34"
+                            fill="none"
+                            stroke="hsl(var(--primary))"
+                            strokeWidth="6"
+                            strokeLinecap="round"
+                            strokeDasharray="213.6"
+                            initial={{ strokeDashoffset: 213.6 }}
+                            animate={{ strokeDashoffset: 27.7 }}
+                            transition={{ duration: 1.5, delay: 0.8 }}
+                          />
+                        </svg>
+                        <span className="absolute font-display text-xl font-bold text-foreground">87%</span>
+                      </motion.div>
+                      <span className="text-xs font-semibold text-foreground">AI Trust Score</span>
+                      <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">Cross-verified</span>
+                      <div className="mt-2 inline-flex items-center gap-1 rounded-full border border-safety/20 bg-safety/10 px-2 py-0.5">
+                        <CheckCircle className="h-3 w-3 text-safety" />
+                        <span className="font-mono text-[9px] font-bold uppercase tracking-wider text-safety">Verified</span>
+                      </div>
+                    </motion.div>
+
+                    <div className="grid grid-cols-2 gap-3">
+                      {[
+                        { Icon: Users, label: "Reports", value: "847", accent: "text-primary", bg: "bg-primary/10" },
+                        { Icon: Globe, label: "Regions", value: "24", accent: "text-trust", bg: "bg-trust/10" },
+                      ].map((s, i) => (
+                        <motion.div
+                          key={i}
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 1.1 + i * 0.1 }}
+                          className="rounded-xl border border-border/40 bg-card/80 p-3"
+                        >
+                          <div className={`mb-1.5 flex h-7 w-7 items-center justify-center rounded-lg ${s.bg}`}>
+                            <s.Icon className={`h-3.5 w-3.5 ${s.accent}`} />
+                          </div>
+                          <p className="font-display text-lg font-bold leading-none text-foreground">{s.value}</p>
+                          <p className="mt-1 font-mono text-[9px] uppercase tracking-wider text-muted-foreground">{s.label}</p>
+                        </motion.div>
+                      ))}
+                    </div>
                   </div>
-                </motion.div>
+                </div>
               </div>
             </div>
 
-            {/* Floating side elements */}
+            {/* Floating side chips */}
             <motion.div
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -left-8 top-1/4 hidden rounded-xl border border-border/50 bg-card/90 p-3 shadow-lg backdrop-blur-sm lg:block"
+              className="absolute -left-6 top-16 hidden items-center gap-2.5 rounded-2xl border border-border/50 bg-card/90 p-3 shadow-xl shadow-safety/10 backdrop-blur-xl lg:flex"
             >
-              <div className="flex items-center gap-2">
-                <div className="h-8 w-8 rounded-lg bg-safety/10 flex items-center justify-center">
-                  <Navigation className="h-4 w-4 text-safety" />
-                </div>
-                <div>
-                  <p className="text-[10px] font-semibold text-foreground">Safe Route Found</p>
-                  <p className="text-[9px] text-muted-foreground">via GT Road • 12 min</p>
-                </div>
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-safety/10">
+                <Navigation className="h-4 w-4 text-safety" />
+              </div>
+              <div>
+                <p className="text-[11px] font-semibold text-foreground">Safe Route Found</p>
+                <p className="font-mono text-[9px] text-muted-foreground">via GT Road · 12 min</p>
               </div>
             </motion.div>
+
             <motion.div
               animate={{ y: [0, 8, 0] }}
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-              className="absolute -right-6 bottom-1/4 hidden rounded-xl border border-border/50 bg-card/90 p-3 shadow-lg backdrop-blur-sm lg:block"
+              className="absolute -right-4 bottom-20 hidden items-center gap-2.5 rounded-2xl border border-border/50 bg-card/90 p-3 shadow-xl shadow-alert/10 backdrop-blur-xl lg:flex"
             >
-              <div className="flex items-center gap-2">
-                <div className="h-8 w-8 rounded-lg bg-alert/10 flex items-center justify-center">
-                  <AlertTriangle className="h-4 w-4 text-alert" />
-                </div>
-                <div>
-                  <p className="text-[10px] font-semibold text-foreground">Flash Flood Alert</p>
-                  <p className="text-[9px] text-muted-foreground">Swat Valley • 2 min ago</p>
-                </div>
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-alert/10">
+                <AlertTriangle className="h-4 w-4 text-alert" />
               </div>
+              <div>
+                <p className="text-[11px] font-semibold text-foreground">Flash Flood Alert</p>
+                <p className="font-mono text-[9px] text-muted-foreground">Swat Valley · 2 min ago</p>
+              </div>
+            </motion.div>
+
+            <motion.div
+              animate={{ y: [0, -6, 0] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+              className="absolute -bottom-6 left-1/2 hidden -translate-x-1/2 items-center gap-2.5 rounded-full border border-border/50 bg-card/90 px-4 py-2 shadow-xl shadow-primary/10 backdrop-blur-xl md:flex"
+            >
+              <Volume2 className="h-3.5 w-3.5 text-primary" />
+              <span className="text-[11px] font-medium text-foreground">Voice alerts in</span>
+              <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-primary">Urdu · EN · PS · SD</span>
             </motion.div>
           </motion.div>
         </motion.div>
