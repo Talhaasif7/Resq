@@ -242,18 +242,17 @@ const Landing: React.FC = () => {
             style={{ perspective: 1400, transformStyle: "preserve-3d" }}
             className="relative mx-auto mt-24 max-w-6xl"
           >
-            {/* Aurora glow halo */}
-            <div className="pointer-events-none absolute -inset-10 -z-10">
-              <div className="absolute left-1/4 top-0 h-72 w-72 rounded-full bg-primary/25 blur-[120px]" />
-              <div className="absolute right-1/4 bottom-0 h-72 w-72 rounded-full bg-trust/25 blur-[120px]" />
-              <div className="absolute left-1/2 top-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-safety/15 blur-[140px]" />
+            {/* Subtle accent glow */}
+            <div className="pointer-events-none absolute -inset-6 -z-10">
+              <div className="absolute left-1/4 top-1/4 h-64 w-64 rounded-full bg-primary/15 blur-[100px]" />
+              <div className="absolute right-1/4 bottom-1/4 h-64 w-64 rounded-full bg-trust/15 blur-[100px]" />
             </div>
 
-            {/* Reflective glass frame */}
-            <div className="relative rounded-[28px] border border-white/40 bg-gradient-to-br from-white/70 via-white/40 to-white/20 p-2 shadow-[0_30px_80px_-20px_hsl(var(--primary)/0.35)] backdrop-blur-2xl dark:border-white/10 dark:from-white/10 dark:via-white/5 dark:to-transparent">
-              <div className="rounded-[22px] border border-border/40 bg-card/80 p-5 backdrop-blur-xl">
+            {/* Crisp dashboard frame */}
+            <div className="relative overflow-hidden rounded-[24px] border border-border bg-card shadow-[0_30px_80px_-20px_hsl(var(--primary)/0.25)]">
+              <div className="p-5 sm:p-6">
                 {/* Top status bar */}
-                <div className="mb-5 flex items-center justify-between border-b border-border/40 pb-4">
+                <div className="mb-5 flex items-center justify-between border-b border-border pb-4">
                   <div className="flex items-center gap-3">
                     <div className="flex gap-1.5">
                       <span className="h-2.5 w-2.5 rounded-full bg-alert/60" />
