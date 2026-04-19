@@ -173,10 +173,7 @@ const Landing: React.FC = () => {
           <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] bg-[size:60px_60px] dark:bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)]" />
         </div>
 
-        <motion.div
-          style={{ y: heroParallax, scale: heroScale }}
-          className="relative mx-auto max-w-7xl px-4 pb-20 pt-20 lg:px-8 lg:pt-32"
-        >
+        <div className="relative mx-auto max-w-7xl px-4 pb-20 pt-20 lg:px-8 lg:pt-32">
           <div className="mx-auto max-w-3xl text-center">
             <motion.div
               initial={{ opacity: 0, y: 20, scale: 0.9 }}
