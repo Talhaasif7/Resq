@@ -176,7 +176,7 @@ const Landing: React.FC = () => {
         </div>
 
         <motion.div
-          style={{ y: heroParallax, scale: heroScale, opacity: heroOpacity }}
+          style={{ y: heroParallax, scale: heroScale }}
           className="relative mx-auto max-w-7xl px-4 pb-20 pt-20 lg:px-8 lg:pt-32"
         >
           <div className="mx-auto max-w-3xl text-center">
