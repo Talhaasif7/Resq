@@ -103,10 +103,8 @@ const stats = [
 ];
 
 const Landing: React.FC = () => {
-  const { scrollYProgress } = useScroll();
   const { isAuthenticated } = useAuth();
-  const heroParallax = useTransform(scrollYProgress, [0, 0.3], [0, -40]);
-  const heroScale = useTransform(scrollYProgress, [0, 0.2], [1, 0.98]);
+
 
   return (
     <div className="min-h-screen bg-background">
@@ -175,10 +173,7 @@ const Landing: React.FC = () => {
           <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] bg-[size:60px_60px] dark:bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)]" />
         </div>
 
-        <motion.div
-          style={{ y: heroParallax, scale: heroScale }}
-          className="relative mx-auto max-w-7xl px-4 pb-20 pt-20 lg:px-8 lg:pt-32"
-        >
+        <div className="relative mx-auto max-w-7xl px-4 pb-20 pt-20 lg:px-8 lg:pt-32">
           <div className="mx-auto max-w-3xl text-center">
             <motion.div
               initial={{ opacity: 0, y: 20, scale: 0.9 }}
@@ -237,9 +232,9 @@ const Landing: React.FC = () => {
 
           {/* Hero visual — Aurora glass dashboard preview */}
           <motion.div
-            initial={float3D.initial}
-            animate={float3D.animate}
-            style={{ perspective: 1400, transformStyle: "preserve-3d" }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
             className="relative mx-auto mt-24 max-w-6xl"
           >
             {/* Subtle accent glow */}
@@ -397,9 +392,10 @@ const Landing: React.FC = () => {
 
             {/* Floating side chips */}
             <motion.div
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -left-6 top-16 hidden items-center gap-2.5 rounded-2xl border border-border/50 bg-card/90 p-3 shadow-xl shadow-safety/10 backdrop-blur-xl lg:flex"
+              animate={{ y: [0, -8, 0] }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+              style={{ willChange: "transform" }}
+              className="absolute -left-6 top-16 hidden items-center gap-2.5 rounded-2xl border border-border bg-card p-3 shadow-xl shadow-safety/10 lg:flex"
             >
               <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-safety/10">
                 <Navigation className="h-4 w-4 text-safety" />
@@ -411,9 +407,10 @@ const Landing: React.FC = () => {
             </motion.div>
 
             <motion.div
-              animate={{ y: [0, 8, 0] }}
-              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-              className="absolute -right-4 bottom-20 hidden items-center gap-2.5 rounded-2xl border border-border/50 bg-card/90 p-3 shadow-xl shadow-alert/10 backdrop-blur-xl lg:flex"
+              animate={{ y: [0, 6, 0] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+              style={{ willChange: "transform" }}
+              className="absolute -right-4 bottom-20 hidden items-center gap-2.5 rounded-2xl border border-border bg-card p-3 shadow-xl shadow-alert/10 lg:flex"
             >
               <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-alert/10">
                 <AlertTriangle className="h-4 w-4 text-alert" />
@@ -425,16 +422,17 @@ const Landing: React.FC = () => {
             </motion.div>
 
             <motion.div
-              animate={{ y: [0, -6, 0] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-              className="absolute -bottom-6 left-1/2 hidden -translate-x-1/2 items-center gap-2.5 rounded-full border border-border/50 bg-card/90 px-4 py-2 shadow-xl shadow-primary/10 backdrop-blur-xl md:flex"
+              animate={{ y: [0, -5, 0] }}
+              transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+              style={{ willChange: "transform" }}
+              className="absolute -bottom-6 left-1/2 hidden -translate-x-1/2 items-center gap-2.5 rounded-full border border-border bg-card px-4 py-2 shadow-xl shadow-primary/10 md:flex"
             >
               <Volume2 className="h-3.5 w-3.5 text-primary" />
               <span className="text-[11px] font-medium text-foreground">Voice alerts in</span>
               <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-primary">Urdu · EN · PS · SD</span>
             </motion.div>
           </motion.div>
-        </motion.div>
+        </div>
       </section>
 
       {/* Stats */}
