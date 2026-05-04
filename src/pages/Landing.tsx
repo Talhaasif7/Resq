@@ -88,7 +88,7 @@ const features = [
   {
     icon: Volume2,
     title: "Multilingual Voice Alerts",
-    description: "Audio alerts in Urdu, English, Pashto, and Sindhi for maximum accessibility.",
+    description: "Audio alerts in Urdu and English for maximum accessibility.",
     color: "text-primary",
     bg: "bg-primary/10",
     gradient: "from-primary/20 to-primary/5",
@@ -429,7 +429,7 @@ const Landing: React.FC = () => {
             >
               <Volume2 className="h-3.5 w-3.5 text-primary" />
               <span className="text-[11px] font-medium text-foreground">Voice alerts in</span>
-              <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-primary">Urdu · EN · PS · SD</span>
+              <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-primary">Urdu · EN</span>
             </motion.div>
           </motion.div>
         </div>
