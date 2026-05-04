@@ -51,8 +51,6 @@ const VoiceAlertWaveform: React.FC = () => {
         <div className="flex gap-2 text-[10px] text-muted-foreground">
           <span className="rounded-full bg-secondary/50 px-2 py-0.5">English</span>
           <span className="rounded-full bg-secondary/50 px-2 py-0.5">اردو</span>
-          <span className="rounded-full bg-secondary/50 px-2 py-0.5">پشتو</span>
-          <span className="rounded-full bg-secondary/50 px-2 py-0.5">سندھی</span>
         </div>
       </div>
     </motion.div>
