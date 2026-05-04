@@ -429,7 +429,7 @@ const Landing: React.FC = () => {
             >
               <Volume2 className="h-3.5 w-3.5 text-primary" />
               <span className="text-[11px] font-medium text-foreground">Voice alerts in</span>
-              <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-primary">Urdu · EN · PS · SD</span>
+              <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-primary">Urdu · EN</span>
             </motion.div>
           </motion.div>
         </div>
