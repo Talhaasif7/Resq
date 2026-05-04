@@ -88,7 +88,7 @@ const features = [
   {
     icon: Volume2,
     title: "Multilingual Voice Alerts",
-    description: "Audio alerts in Urdu, English, Pashto, and Sindhi for maximum accessibility.",
+    description: "Audio alerts in Urdu and English for maximum accessibility.",
     color: "text-primary",
     bg: "bg-primary/10",
     gradient: "from-primary/20 to-primary/5",
